@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using SprawdzianSzymonLesnik.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<SprawdzianSzymonLesnikContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SprawdzianSzymonLesnikContext") ?? throw new InvalidOperationException("Connection string 'SprawdzianSzymonLesnikContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
